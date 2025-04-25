@@ -1,8 +1,14 @@
 import "@/src/app/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Navigation from "@/src/components/Navigation";
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
+// Font configuration
+const inter = Inter({ 
+  subsets: ["latin"], 
+  display: "swap",
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   title: "Creator Genius AI – Power Your Content Workflow",
@@ -33,8 +39,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.className}>
-     <body className={`${inter.className} scroll-smooth bg-white text-slate-900`}>{children}</body>
+    <html 
+      lang="en" 
+      className={`${inter.variable} scroll-smooth`}
+    >
+      <head>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5A33FF" />
+        <meta name="msapplication-TileColor" content="#5A33FF" />
+        <meta name="theme-color" content="#ffffff" />
+        
+        {/* Preload key assets */}
+        <link rel="preload" href="/CG-AI Logo.png" as="image" />
+        <link rel="preload" href="/grid-pattern.svg" as="image" />
+      </head>
+      <body className="antialiased text-slate-900 bg-white">
+        <Navigation />
+        <main>{children}</main>
+      </body>
     </html>
   );
 }
